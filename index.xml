@@ -8,14 +8,16 @@
     <subtitle>Operations Manual</subtitle>
 
     <copyright>
-        <year>2010</year>
         <year>2011</year>
-        <holder>Oracle and/or its affiliates.</holder>
+        <holder>Oracle and/or its affiliates. (The original version of this Operations Manual (without the Whamcloud modifications.)</holder>
         </copyright>
     <copyright>
         <year>2011</year>
-        <holder>Whamcloud, Inc.</holder>
+        <holder>Whamcloud, Inc. (Whamcloud modifications to the original version of this Operations Manual.)</holder>
     </copyright>
+
+    <para>Notwithstanding Whamcloud’s ownership of the copyright in the modifications to the original version of this Operations Manual, as between Whamcloud and Oracle, Oracle and/or its affiliates retain sole ownership of the copyright in the unmodified portions of this Operations Manual. 
+    </para>
 
     <xi:include href="legalnotice.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
   </info>
