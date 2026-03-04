@@ -22,9 +22,6 @@
     <listitem>
       <para><xref linkend="benchmark.mds_survey_ref"/></para>
     </listitem>
-    <listitem>
-      <para><xref linkend="benchmark.stats-collect"/></para>
-    </listitem>
   </itemizedlist>
   <section xml:id="benchmark.iokit">
     <title>
@@ -70,9 +67,6 @@
       </itemizedlist>
       <para>Typically with these tests, a Lustre file system should deliver
       85-90% of the raw device performance.</para>
-      <para>A utility <literal>stats-collect</literal> is also provided to
-      collect application profiling information from Lustre clients and servers.
-      See <xref linkend="benchmark.stats-collect"/> for more information.</para>
     </section>
     <section remap="h3">
       <title>Preparing to Use the Lustre I/O Kit</title>
@@ -1079,110 +1073,6 @@ Ost#  Read(MB/s)  Write(MB/s)  Read-time  Write-time
         More detailed debug information is available in the ${rslt}.detail
         file</para>
       </note>
-    </section>
-  </section>
-  <section xml:id="benchmark.stats-collect">
-    <title><indexterm><primary>benchmarking</primary>
-      <secondary>application profiling</secondary></indexterm>
-    Collecting Application Profiling Information (
-    <literal>stats-collect</literal>)</title>
-    <para>The <literal>stats-collect</literal> utility contains the following
-    scripts used to collect application profiling information from Lustre
-    clients and servers:</para>
-    <itemizedlist>
-      <listitem>
-        <para><literal>lstat.sh</literal>  - Script for a single node that is
-        run on each profile node.</para>
-      </listitem>
-      <listitem>
-        <para><literal>gather_stats_everywhere.sh</literal>  - Script that
-        collect statistics.</para>
-      </listitem>
-      <listitem>
-        <para><literal>config.sh</literal>  - Script that contains customized
-        configuration descriptions.</para>
-      </listitem>
-    </itemizedlist>
-    <para>The <literal>stats-collect</literal> utility requires:</para>
-    <itemizedlist>
-      <listitem>
-        <para>Lustre software to be installed and set up on your cluster</para>
-      </listitem>
-      <listitem>
-        <para>SSH and SCP access to these nodes without requiring a password</para>
-      </listitem>
-    </itemizedlist>
-    <section remap="h3">
-      <title>Using <literal>stats-collect</literal></title>
-      <para>The stats-collect utility is configured by including profiling
-      configuration variables in the config.sh script. Each configuration
-      variable takes the following form, where 0 indicates statistics are to be
-      collected only when the script starts and stops and <emphasis>n</emphasis>
-      indicates the interval in seconds at which statistics are to be collected:
-      </para>
-      <screen><replaceable>statistic</replaceable>_INTERVAL=<replaceable>0|n</replaceable></screen>
-      <para>Statistics that can be collected include:</para>
-      <itemizedlist>
-        <listitem>
-          <para><literal>VMSTAT</literal>  - Memory and CPU usage and aggregate
-          read/write operations</para>
-        </listitem>
-        <listitem>
-          <para><literal>SERVICE</literal>  - Lustre OST and MDT RPC service
-          statistics</para>
-        </listitem>
-        <listitem>
-          <para><literal>BRW</literal> - OST bulk read/write statistics
-          (brw_stats)</para>
-        </listitem>
-        <listitem>
-          <para><literal>SDIO</literal>  - SCSI disk IO statistics (sd_iostats)
-          </para>
-        </listitem>
-        <listitem>
-          <para><literal>MBALLOC</literal>  - <literal>ldiskfs</literal> block
-          allocation statistics</para>
-        </listitem>
-        <listitem>
-          <para><literal>IO</literal>  - Lustre target operations statistics
-          </para>
-        </listitem>
-        <listitem>
-          <para><literal>JBD</literal>  - ldiskfs journal statistics</para>
-        </listitem>
-        <listitem>
-          <para><literal>CLIENT</literal>  - Lustre OSC request statistics
-          </para>
-        </listitem>
-      </itemizedlist>
-      <para>To collect profile information:</para>
-      <para>Begin collecting statistics on each node specified in the config.sh
-      script.</para>
-      <orderedlist>
-        <listitem>
-          <para>Starting the collect profile daemon on each node by entering:
-          </para>
-          <screen>sh gather_stats_everywhere.sh config.sh start </screen>
-        </listitem>
-        <listitem>
-          <para>Run the test.</para>
-        </listitem>
-        <listitem>
-          <para>Stop collecting statistics on each node, clean up the temporary
-          file, and create a profiling tarball.</para>
-          <para>Enter:</para>
-          <screen>sh gather_stats_everywhere.sh config.sh stop <replaceable>log_name</replaceable>.tgz</screen>
-          <para>When <literal><replaceable>log_name</replaceable>.tgz</literal>
-          is specified, a profile tarball
-          <literal><replaceable>/tmp/log_name</replaceable>.tgz</literal> is
-          created.</para>
-        </listitem>
-        <listitem>
-          <para>Analyze the collected statistics and create a csv tarball for
-          the specified profiling data.</para>
-          <screen>sh gather_stats_everywhere.sh config.sh analyse log_tarball.tgz csv</screen>
-        </listitem>
-      </orderedlist>
     </section>
   </section>
 </chapter>
